@@ -5,5 +5,5 @@ Trivial boilerplate for webpack, babel, jest and sass.
 - run dev server: `npm start`
 - run tests: `npm test`
 
-#Eslint configuration
+## Eslint configuration
 I love the [Airbnb Javascript Style Guide](https://github.com/airbnb/javascript) so I decided to extend eslint with it.
