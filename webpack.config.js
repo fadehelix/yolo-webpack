@@ -23,6 +23,18 @@ const config = [
           ],
         },
         {
+          test: /\.(png|svg|jpg|jpeg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name]-[hash].[ext]',
+                outputPath: 'images/',
+              },
+            },
+          ],
+        },
+        {
           test: /\.scss$/,
           use: [
             {
