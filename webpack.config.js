@@ -1,9 +1,15 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const config = [
-  {
+const config = {
     devtool: 'source-map',
+    entry: './src/index.js',
+    output: {
+      filename: 'main.js',
+      path: path.resolve(__dirname, 'dist')
+    },
     module: {
       rules: [
         {
@@ -11,6 +17,9 @@ const config = [
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
           },
         },
         {
@@ -35,15 +44,9 @@ const config = [
           ],
         },
         {
-          test: /\.scss$/,
+          test: /\.s[ac]ss$/i,
           use: [
-            {
-              loader: 'file-loader',
-              options: {
-                name: 'main.css',
-              },
-            },
-            { loader: 'extract-loader' },
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -62,7 +65,7 @@ const config = [
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: path.resolve(__dirname, "src", "index.html"),
         filename: './index.html',
       }),
       new ScriptExtHtmlWebpackPlugin({
@@ -75,8 +78,11 @@ const config = [
           },
         ],
       }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
     ],
-  },
-];
+  };
 
 module.exports = config;

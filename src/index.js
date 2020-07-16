@@ -1,3 +1,5 @@
-import './index.scss';
+const h2 = document.createElement('h2');
+const app = document.getElementById('app');
 
-console.log('Webpack works!');
+h2.innerHTML = 'Webpack works &#9829';
+app.append(h2);
